@@ -6,11 +6,12 @@ import "../assets/css/Form.css";
 import Sidebar from "./Sidebar";
 import { addApi } from "./Api.jsx";
 import NotificationModal from "./NotificationModal.jsx";
+import ReactConfetti from "react-confetti";
 
-function AddStudentPage  ()  {
+const AddStudentPage = () => {
     const navigate = useNavigate();
 
-    // State management for student data
+    // State management
     const [studentData, setStudentData] = useState({
         name: "",
         fatherName: "",
@@ -18,29 +19,31 @@ function AddStudentPage  ()  {
         mobileNo: "",
         createdBy: localStorage.getItem("createdBy") || "",
     });
-
-    // Modal state for notifications
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
+    const [confetti, setConfetti] = useState(false);
 
     // Modal handlers
-    const handleCloseModal = () => setShowModal(false);
+    const handleCloseModal = () => {
+        setShowModal(false);
+        if (confetti) setConfetti(false);
+    };
+
     const handleShowModal = (message) => {
         setModalMessage(message);
         setShowModal(true);
     };
 
-    // Redirect to login if not authenticated
+    // Redirect to login if unauthenticated
     useEffect(() => {
         if (!localStorage.getItem("auth")) {
             navigate("/");
         }
     }, [navigate]);
 
-    // Input change handler with validation
+    // Handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
-        // Update state
         setStudentData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -48,52 +51,63 @@ function AddStudentPage  ()  {
     };
 
     // Validation function
-const validateInput = (name, value) => {
-    if (name === "name" || name === "fatherName") {
-        const nameRegex = /^[A-Za-z\s]*$/;
-        if (!nameRegex.test(value)) {
-            return `${name === "name" ? "Student" : "Father's"} Name can only contain alphabets and spaces.`;
+    const validateInput = (name, value) => {
+        if (["name", "fatherName"].includes(name)) {
+            const nameRegex = /^[A-Za-z\s]*$/;
+            if (!nameRegex.test(value)) {
+                return `${name === "name" ? "Student" : "Father's"} Name can only contain alphabets and spaces.`;
+            }
         }
-    } else if (name === "mobileNo") {
-        const mobileRegex = /^[0-9]{10}$/;
-        if (!mobileRegex.test(value)) {
-            return "Please enter a valid 10-digit mobile number.";
+        if (name === "mobileNo") {
+            const mobileRegex = /^[0-9]{10}$/;
+            if (!mobileRegex.test(value)) {
+                return "Please enter a valid 10-digit mobile number.";
+            }
         }
-    }
-    return null; // Return null if validation passes
-};
+        return null;
+    };
 
-// Form submission handler
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { name, fatherName, dateofBirth, mobileNo } = studentData;
-    // Check for empty fields
-    if (!name || !fatherName || !dateofBirth || !mobileNo) {
-        handleShowModal("Please fill in all fields.");
-        return;
-    }
-    // Validate each input
-    let errorMessage = validateInput("name", name);
-    if (!errorMessage) errorMessage = validateInput("fatherName", fatherName);
-    if (!errorMessage) errorMessage = validateInput("mobileNo", mobileNo);
-    if (errorMessage) {
-        handleShowModal(errorMessage);
-        return;
-    }
-    // API submission
-    const accesstoken = localStorage.getItem("accesstoken");
-        const response = await addApi("Student/AddStudent", studentData, accesstoken);
+    // Form submission handler
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const { name, fatherName, dateofBirth, mobileNo } = studentData;
+
+        // Check for empty fields
+        if (!name || !fatherName || !dateofBirth || !mobileNo) {
+            handleShowModal("Please fill in all fields.");
+            return;
+        }
+
+        // Validate inputs
+        let errorMessage =
+            validateInput("name", name) ||
+            validateInput("fatherName", fatherName) ||
+            validateInput("mobileNo", mobileNo);
+
+        if (errorMessage) {
+            handleShowModal(errorMessage);
+            return;
+        }
+        // Submit data to API
+        const response = await addApi("Student/AddStudent", studentData);
+
         if (response) {
-            handleShowModal(response.message); // Show success message
+            handleShowModal(response.message || "Student added successfully!");
+            if(response.status == "success")
+            {
+                setConfetti(true);  
+            }
+             // Trigger confetti on success
         } else {
             handleShowModal(response.errors || "An error occurred. Please try again.");
         }
-};
-
+    };
 
     return (
         <div className="d-flex">
             <NotificationModal show={showModal} onHide={handleCloseModal} modalMessage={modalMessage} />
+            {confetti && <ReactConfetti />}
             <Sidebar />
             <Container fluid className="form-container p-4 flex-grow-1">
                 <Row className="mb-3">
