@@ -33,6 +33,7 @@ function StudentListPage() {
         if (response) {
             const { data } = response;
             setStudents(data || []); // Set the students data
+            console.log(data);
             setLoading(false); // Set loading to false when data is fetched
         } else {
             console.log("Failed to fetch data or response was empty.");
@@ -71,6 +72,7 @@ function StudentListPage() {
     // Handle delete action after confirmation
     const handleDeleteConfirm = async () => {
         if (studentToDelete) {
+            
             const credentials = {
                 "id": `${studentToDelete}`, // Correctly using colon (:) for object properties
                 "DeletedBy": `${name}`,      // Replace "name" with the actual variable holding the delete user's name
@@ -111,6 +113,7 @@ function StudentListPage() {
                                     <th>Mobile No</th>
                                     <th>Date of Birth</th>
                                     <th>Age</th>
+                                    <th>Image</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -122,6 +125,7 @@ function StudentListPage() {
                                         <td>{student.fatherName}</td>
                                         <td>{student.mobileNo}</td>
                                         <td>{student.dateOfBirth}</td>
+                                        <td><img src={`..assets/image/${student.imgfileName}`} alt="Student" /></td>
                                         <td>{calculateAge(student.dateOfBirth)}</td>
                                         <td>
                                             <Link
