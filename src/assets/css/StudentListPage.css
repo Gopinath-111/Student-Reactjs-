@@ -1,37 +1,23 @@
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap');
-
-
-/* Apply global styles */
-body {
-    font-family: "Crimson Pro", serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #ab66f5ea, #5193e9);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.table-responsive 
+{
+    max-height: 300px;
+    height: 50%;
+    overflow: scroll;
+    scrollbar-width: thin;
 }
 
 /* General container styling */
-.container {
+.container-lg {
+    margin-left: 25%;
+    width: 100%;
+    position: relative;
     padding: 2rem;
     background-color: #f9f9f9;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /*margin-left: 150px;*/
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
 }
 
-/* Page title */
-h1 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #333;
-    font-family: 'Arial', sans-serif;
-}
 
 /* Table styles */
 table {

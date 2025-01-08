@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Button, Modal, InputGroup } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
 import "../assets/css/LoginPage.css";
 import {loginApi} from "./Api.jsx";
-import loginimg from "../assets/login.jpg";
-import { FaEnvelope, FaKey } from "react-icons/fa";
 import NotificationModal from "./NotificationModal.jsx";
+import { FaSignInAlt } from "react-icons/fa";
 
 //localStorage.clear();
 function LoginPage ()  {
@@ -38,7 +38,6 @@ function LoginPage ()  {
                 localStorage.setItem("auth", true);
                 localStorage.setItem("accesstoken", accesstoken);
                 localStorage.setItem("createdBy", claims.name);
-
                 handleShowModal(message);
                 setTimeout(() => navigate("/home"), 1500);
         } else {
@@ -52,16 +51,13 @@ function LoginPage ()  {
             {/* Modal for Notifications */}
             <NotificationModal show={showModal} onHide={handleCloseModal} modalMessage={modalMessage} />
             <Row>
-                {/* Left Section - Login Image */}
-                <Col xs={6}>
-                    <img src={loginimg} alt="Login" className="img-fluid" />
-                </Col>
-
                 {/* Right Section - Login Form */}
-                <Col xs={6}>
-                    <Row className="justify-content-center mb-4">
-                        <h3>Login Form</h3>
-                    </Row>
+                <Col xs={12}>
+                <Row className="justify-content-center mb-4 mt-4">
+                    <Col xs={12} style={{ textAlign: "start" }}>
+                    <h3><FaSignInAlt size={30} className="mx-2" /> Login Form </h3>
+                    </Col>
+                </Row>
                     <Row className="justify-content-center">
                         <Col xs={12}>
                             <Form onSubmit={handleLogin}>
@@ -72,10 +68,6 @@ function LoginPage ()  {
                                             <Form.Label className="ms-2">Email</Form.Label>
                                         </Col>
                                         <Col xs={9}>
-                                            <InputGroup>
-                                                <InputGroup.Text>
-                                                    <FaEnvelope />
-                                                </InputGroup.Text>
                                                 <Form.Control
                                                     type="email"
                                                     name="email"
@@ -84,7 +76,6 @@ function LoginPage ()  {
                                                     onChange={handleChange}
                                                     required
                                                 />
-                                            </InputGroup>
                                         </Col>
                                     </Row>
                                 </Form.Group>
@@ -96,10 +87,6 @@ function LoginPage ()  {
                                             <Form.Label className="ms-2">Password</Form.Label>
                                         </Col>
                                         <Col xs={9}>
-                                        <InputGroup>
-                                            <InputGroup.Text>
-                                                <FaKey />
-                                            </InputGroup.Text>
                                             <Form.Control
                                                 type="password"
                                                 name="password"
@@ -108,7 +95,6 @@ function LoginPage ()  {
                                                 onChange={handleChange}
                                                 required
                                             />
-                                            </InputGroup>
                                         </Col>
                                     </Row>
                                 </Form.Group>
@@ -121,6 +107,12 @@ function LoginPage ()  {
                                 </div>
                             </Form>
                         </Col>
+                    </Row>
+                    <Row className="justify-content-center">
+                        <p>
+                            Do You haven't Account? <br></br>
+                            <Link to="/register">Register Here</Link>
+                        </p>
                     </Row>
                 </Col>
             </Row>

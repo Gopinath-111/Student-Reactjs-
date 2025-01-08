@@ -1,38 +1,24 @@
-/* Container styling */
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap');
-
-
-/* Apply global styles */
-body {
-    font-family: "Crimson Pro", serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #ab66f5ea, #5193e9);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .login-container {
-    width: 75%;
-    background-color: rgb(255, 255, 255);
+    max-width: 500px;
+    width: 100%;
+    background: white;
     position: absolute;
     transform: translate(-50%,-50%);
     top: 50%;
     left: 50%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
-    border: 2px solid rgb(255, 255, 255);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    vertical-align: middle;
 }
 
+.react-tel-input .form-control {
+width: 350px;
+}
 /* Form header */
 h3 {
-    color: #333;
+    color: #000000;
     font-weight: 700;
     text-align: center;
     margin-bottom: 1rem;
