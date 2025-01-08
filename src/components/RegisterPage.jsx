@@ -102,7 +102,7 @@ function RegisterPage() {
         e.preventDefault();
         const { userOtp } = credentials;
         var generatedOtp = sessionStorage.getItem("generatedOtp");
-        if( generatedOtp == userOtp )
+        if(generatedOtp.trim() == userOtp.trim())
         {
             const response = await registerApi("Admin/Register", credentials);
             if (response) {
@@ -111,6 +111,10 @@ function RegisterPage() {
             } else {
                 handleShowModal(response.message);
             }
+        }
+        else
+        {
+            console.log("Not Match");
         }
 
     };

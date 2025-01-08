@@ -1,21 +1,20 @@
 .login-container {
+    padding: 1rem 1rem;
     max-width: 500px;
     width: 100%;
-    background: white;
+    max-height: 500px;
+    height: 100%;
     position: absolute;
     transform: translate(-50%,-50%);
     top: 50%;
     left: 50%;
+    background-color: rgba(255, 255, 255, 0.144);
     border-radius: 10px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgb(255, 255, 255);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     vertical-align: middle;
+    backdrop-filter: blur(20px);
 }
 
-.react-tel-input .form-control {
-width: 350px;
-}
 /* Form header */
 h3 {
     color: #000000;
@@ -26,7 +25,7 @@ h3 {
 
 /* Form label */
 form .form-label {
-    color: #333;
+    color: black;
     font-weight: 500;
     font-size: 1rem;
 }

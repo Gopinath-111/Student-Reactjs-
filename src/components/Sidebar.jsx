@@ -9,6 +9,17 @@ const Sidebar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
 
     const toggleSidebar = () => {
+            if (sidebarOpen) {
+                const contentElement = document.querySelector(".content");
+                // If the sidebar is open, remove "content" and add "content-full-width"
+                contentElement.classList.remove("content");
+                contentElement.classList.add("content-full-width");
+            } else {
+                const contentElement = document.querySelector(".content-full-width");
+                // If the sidebar is closed, remove "content-full-width" and add "content"
+                contentElement.classList.remove("content-full-width");
+                contentElement.classList.add("content");
+            }
         setSidebarOpen(!sidebarOpen);
     };
 
@@ -19,34 +30,35 @@ const Sidebar = () => {
     };
 
     return (
-        <div className={`sidebar bg-light p-4 ${sidebarOpen ? "open" : "closed"}`}>
+        <div className={`sidebar bg-light ${sidebarOpen ? "p-4 open" : "closed"}`}>
             <Row className="align-items-center mb-4">
-                <Col xs={8} className="text-center">
-                    <h4 className="mb-0">MENU</h4>
-                </Col>
-                <Col xs={4} className="text-end">
+                <Col xs={12} className="text-end">
                     <FaBars className="mx-2" onClick={toggleSidebar} />
                 </Col>
             </Row>
             <Nav className="flex-column">
                 <Nav.Item className="mb-3">
                     <Nav.Link href="/home" className="d-flex align-items-center">
-                        <FaHome className="me-2" /> Homepage
+                        <FaHome className="me-2" />
+                        {sidebarOpen && <span className="mx-2">HOMEPAGE</span>}
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="mb-3">
                     <Nav.Link href="/addstudent" className="d-flex align-items-center">
-                        <FaUser className="me-2" /> Add Students
+                        <FaUser className="me-2" />
+                        {sidebarOpen && <span className="mx-2">ADD STUDENT</span>}
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="mb-3">
                     <Nav.Link href="/studentlist" className="d-flex align-items-center">
-                        <FaList className="me-2" /> Students List
+                        <FaList className="me-2" /> 
+                        {sidebarOpen && <span className="mx-2">STUDENT LIST</span>}
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="mb-3">
                     <Nav.Link className="d-flex align-items-center" onClick={handleLogout}>
-                        <FaSignOutAlt className="me-2" /> Logout
+                        <FaSignOutAlt className="me-2" /> 
+                        {sidebarOpen && <span className="mx-2">LOGOUT</span>}
                     </Nav.Link>
                 </Nav.Item>
             </Nav>

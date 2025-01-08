@@ -1,7 +1,7 @@
 
 /* Sidebar Styles */
 .sidebar {
-  width: 300px;
+  width: 250px;
   position: fixed;
   top: 0;
   left: 0;
@@ -15,6 +15,7 @@
 .sidebar.closed {
   width: 60px;
   overflow: hidden;
+  padding: 10px 10px;
 }
 
 .sidebar h4 {
@@ -41,14 +42,17 @@
 
 /* Content Styles */
 .content {
-  margin-left: 250px;
   transition: margin-left 0.3s ease;
   flex-grow: 1;
   padding: 1rem;
+  margin-left: 250px;
 }
 
-.content.full-width {
-  margin-left: 0;
+.content-full-width {
+  margin-left: 100px;
+  transition: margin-left 0.3s ease;
+  flex-grow: 1;
+  padding: 1rem;
 }
 
 /* Toggle Button */

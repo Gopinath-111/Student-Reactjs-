@@ -25,49 +25,56 @@ function LoginPage ()  {
     };
     const handleLogin = async (e) => {
         e.preventDefault();
-        const url = "Admin/Login";
-        const response = await loginApi(url, credentials);  
-        const { message, accesstoken } = response;
-        if (accesstoken) {
-                const decoded = jwtDecode(accesstoken);
-                const claims = {
-                    name: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
-                    email: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"],
-                    role: decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
-                };
-                localStorage.setItem("auth", true);
-                localStorage.setItem("accesstoken", accesstoken);
-                localStorage.setItem("createdBy", claims.name);
+        try
+        {        const url = "Admin/Login";
+            const response = await loginApi(url, credentials);  
+            const { message, accesstoken } = response;
+            if (accesstoken) {
+                    const decoded = jwtDecode(accesstoken);
+                    const claims = {
+                        name: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
+                        email: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"],
+                        role: decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
+                    };
+                    localStorage.setItem("auth", true);
+                    localStorage.setItem("accesstoken", accesstoken);
+                    localStorage.setItem("createdBy", claims.name);
+                    handleShowModal(message);
+                    setTimeout(() => navigate("/home"), 1500);
+            } else {
                 handleShowModal(message);
-                setTimeout(() => navigate("/home"), 1500);
-        } else {
-            handleShowModal(message);
-            setCredentials({ email: "", password: "" });
+                setCredentials({ email: "", password: "" });
+            }
         }
+        catch(e)
+        {
+            const messgae = e.error;
+            handleChange(message);
+        }
+
     };
 
     return (
-        <Container className="login-container" fluid>
+        <Container className="login-container" fluid="md">
             {/* Modal for Notifications */}
             <NotificationModal show={showModal} onHide={handleCloseModal} modalMessage={modalMessage} />
             <Row>
                 {/* Right Section - Login Form */}
                 <Col xs={12}>
                 <Row className="justify-content-center mb-4 mt-4">
-                    <Col xs={12} style={{ textAlign: "start" }}>
-                    <h3><FaSignInAlt size={30} className="mx-2" /> Login Form </h3>
-                    </Col>
+                    <FaSignInAlt size={30} className="mx-2" />
+                    <h3> Login Form </h3>
                 </Row>
                     <Row className="justify-content-center">
                         <Col xs={12}>
                             <Form onSubmit={handleLogin}>
                                 {/* Email Field */}
-                                <Form.Group className="mb-3">
+                                <Form.Group className="p-4">
                                     <Row>
-                                        <Col xs={3} className="d-flex align-items-center">
+                                        <Col xs={4} className="align-items-center">
                                             <Form.Label className="ms-2">Email</Form.Label>
                                         </Col>
-                                        <Col xs={9}>
+                                        <Col xs={ 8}>
                                                 <Form.Control
                                                     type="email"
                                                     name="email"
@@ -81,12 +88,12 @@ function LoginPage ()  {
                                 </Form.Group>
 
                                 {/* Password Field */}
-                                <Form.Group className="mb-3">
+                                <Form.Group className="mb-3 p-4">
                                     <Row>
-                                        <Col xs={3} className="d-flex align-items-center">
+                                        <Col xs={4} className="align-items-center">
                                             <Form.Label className="ms-2">Password</Form.Label>
                                         </Col>
-                                        <Col xs={9}>
+                                        <Col xs={8}>
                                             <Form.Control
                                                 type="password"
                                                 name="password"
@@ -108,7 +115,7 @@ function LoginPage ()  {
                             </Form>
                         </Col>
                     </Row>
-                    <Row className="justify-content-center">
+                    <Row className="text-center mt-4">
                         <p>
                             Do You haven't Account? <br></br>
                             <Link to="/register">Register Here</Link>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Table, Button, Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import "../assets/css/StudentListPage.css";
+import "../assets/css/App.css";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 import { getApi, deleteApi } from "./Api.jsx";
@@ -91,88 +91,94 @@ function StudentListPage() {
     };
 
     return (
-        <Container fluid="lg">
+        <div className="page-wrapper d-flex">
+            {/* Sidebar */}
             <Sidebar />
-            <div className="table">
-                <h3 className="text-center mb-4">STUDENT LIST</h3>
-                {loading ? (
-                    <p className="text-center">Loading students...</p>
-                ) : students.length > 0 ? (
-                    <Table striped bordered hover responsive>
-                        <thead className="table-primary">
-                            <tr>
-                                <th>S.No</th>
-                                <th>Name</th>
-                                <th>Father's Name</th>
-                                <th>Mobile No</th>
-                                <th>Date of Birth</th>
-                                <th>Age</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {students.map((student, index) => (
-                                <tr key={student.id}>
-                                    <td>{index + 1}</td>
-                                    <td>{student.name}</td>
-                                    <td>{student.fatherName}</td>
-                                    <td>{student.mobileNo}</td>
-                                    <td>{student.dateOfBirth}</td>
-                                    <td>{calculateAge(student.dateOfBirth)}</td>
-                                    <td>
-                                        <Link
-                                            to="/editstudent"
-                                            state={{
-                                                id: student.id,
-                                                name: student.name,
-                                                fatherName: student.fatherName,
-                                                mobileNo: student.mobileNo,
-                                                dateOfBirth: student.dateOfBirth,
-                                            }}
-                                        >
-                                            <Button variant="primary" className="me-1">
-                                                <FaPencilAlt />
-                                            </Button>
-                                        </Link>
-                                        <Button
-                                            variant="danger"
-                                            onClick={() => handleDeleteClick(student.id)}
-                                        >
-                                            <FaTrash />
-                                        </Button>
-                                    </td>
+            {/* Main Content */}
+            <div className="content flex-grow-1 p-4">
+                <Container fluid>
+                <div className="table">
+                    <h3 className="text-center mb-4">STUDENT LIST</h3>
+                    {loading ? (
+                        <p className="text-center">Loading students...</p>
+                    ) : students.length > 0 ? (
+                        <Table striped bordered hover responsive>
+                            <thead className="table-primary">
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Name</th>
+                                    <th>Father's Name</th>
+                                    <th>Mobile No</th>
+                                    <th>Date of Birth</th>
+                                    <th>Age</th>
+                                    <th>Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                ) : (
-                    <p className="text-center">No students found.</p>
-                )}
-            </div>
-            {/* Modal for confirmation and notifications */}
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Notification</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{modalMessage}</Modal.Body>
-                <Modal.Footer>
-                    {studentToDelete ? (
-                        <>
-                            <Button variant="danger" onClick={handleDeleteConfirm}>
-                                Confirm
-                            </Button>
-                            <Button variant="secondary" onClick={() => setShowModal(false)}>
-                                Cancel
-                            </Button>
-                        </>
+                            </thead>
+                            <tbody>
+                                {students.map((student, index) => (
+                                    <tr key={student.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{student.name}</td>
+                                        <td>{student.fatherName}</td>
+                                        <td>{student.mobileNo}</td>
+                                        <td>{student.dateOfBirth}</td>
+                                        <td>{calculateAge(student.dateOfBirth)}</td>
+                                        <td>
+                                            <Link
+                                                to="/editstudent"
+                                                state={{
+                                                    id: student.id,
+                                                    name: student.name,
+                                                    fatherName: student.fatherName,
+                                                    mobileNo: student.mobileNo,
+                                                    dateOfBirth: student.dateOfBirth,
+                                                }}
+                                            >
+                                                <Button variant="primary" className="me-1">
+                                                    <FaPencilAlt />
+                                                </Button>
+                                            </Link>
+                                            <Button
+                                                variant="danger"
+                                                onClick={() => handleDeleteClick(student.id)}
+                                            >
+                                                <FaTrash />
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
                     ) : (
-                        <Button variant="primary" onClick={() => setShowModal(false)}>
-                            Ok
-                        </Button>
+                        <p className="text-center">No students found.</p>
                     )}
-                </Modal.Footer>
-            </Modal>
-        </Container>
+                </div>
+                {/* Modal for confirmation and notifications */}
+                <Modal show={showModal} onHide={() => setShowModal(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Notification</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{modalMessage}</Modal.Body>
+                    <Modal.Footer>
+                        {studentToDelete ? (
+                            <>
+                                <Button variant="danger" onClick={handleDeleteConfirm}>
+                                    Confirm
+                                </Button>
+                                <Button variant="secondary" onClick={() => setShowModal(false)}>
+                                    Cancel
+                                </Button>
+                            </>
+                        ) : (
+                            <Button variant="primary" onClick={() => setShowModal(false)}>
+                                Ok
+                            </Button>
+                        )}
+                    </Modal.Footer>
+                </Modal>
+             </Container>
+             </div>
+            </div>
     );
 }
 
