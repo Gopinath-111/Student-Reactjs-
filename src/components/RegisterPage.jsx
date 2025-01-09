@@ -120,16 +120,17 @@ function RegisterPage() {
     };
 
     return (
-        <Container className="login-container" fluid>
+        <Container className="login-container" fluid="md">
             {/* Modal for Notifications */}
             <NotificationModal show={showModal} onHide={handleCloseModal} modalMessage={modalMessage} />
             
             {isVisible && (
-                <Row id="registerform">
+                <Row >
                     <Col xs={12}>
-                        <Row className="justify-content-center mb-4 mt-4">
-                            <h3>
-                                <FaUserPlus size={30} className="mx-2" /> Registration Form
+                        <Row className="justify-content-center mb-3" style={{ background: "#2575fc", borderTopLeftRadius: "20px", borderTopRightRadius: "20px", color: "white" }}   >
+                        <FaUserPlus size={20} className="mx-2 mt-2 mb-3" />
+                            <h3 style={{color: "white"}}>
+                                 Registration Form
                             </h3>
                         </Row>
 
@@ -139,10 +140,10 @@ function RegisterPage() {
                                     {/* Name Field */}
                                     <Form.Group className="mb-3">
                                         <Row>
-                                            <Col xs={3} className="d-flex align-items-center">
+                                            {/*<Col xs={3} className="d-flex align-items-center">
                                                 <Form.Label className="ms-2">Name</Form.Label>
-                                            </Col>
-                                            <Col xs={9}>
+                                            </Col>*/}
+                                            <Col xs={12}>
                                                 <Form.Control
                                                     type="text"
                                                     name="name"
@@ -158,10 +159,10 @@ function RegisterPage() {
                                     {/* Mobile No Field */}
                                     <Form.Group className="mb-3">
                                         <Row>
-                                            <Col xs={3} className="d-flex align-items-center">
+                                            {/*<Col xs={3} className="d-flex align-items-center">
                                                 <Form.Label className="ms-2">Mobile No</Form.Label>
-                                            </Col>
-                                            <Col xs={9}>
+                                            </Col>*/}
+                                            <Col xs={12}>
                                                 <Form.Control
                                                     type="text"
                                                     name="mobileNo"
@@ -177,10 +178,10 @@ function RegisterPage() {
                                     {/* Email Field */}
                                     <Form.Group className="mb-3">
                                         <Row>
-                                            <Col xs={3} className="d-flex align-items-center">
+                                            {/*<Col xs={3} className="d-flex align-items-center">
                                                 <Form.Label className="ms-2">Email</Form.Label>
-                                            </Col>
-                                            <Col xs={9}>
+                                            </Col>*/}
+                                            <Col xs={12}>
                                                 <Form.Control
                                                     type="email"
                                                     name="email"
@@ -196,10 +197,10 @@ function RegisterPage() {
                                     {/* Password Field */}
                                     <Form.Group className="mb-3">
                                         <Row>
-                                            <Col xs={3} className="d-flex align-items-center">
+                                            {/*<Col xs={3} className="d-flex align-items-center">
                                                 <Form.Label className="ms-2">Password</Form.Label>
-                                            </Col>
-                                            <Col xs={9}>
+                                            </Col>*/}
+                                            <Col xs={12}>
                                                 <Form.Control
                                                     type="password"
                                                     name="password"
@@ -215,10 +216,10 @@ function RegisterPage() {
                                     {/* Confirm Password Field */}
                                     <Form.Group className="mb-3">
                                         <Row>
-                                            <Col xs={3} className="d-flex align-items-center">
+                                            {/*<Col xs={3} className="d-flex align-items-center">
                                                 <Form.Label className="ms-2">Confirm Password</Form.Label>
-                                            </Col>
-                                            <Col xs={9}>
+                                            </Col>*/}
+                                            <Col xs={12}>
                                                 <Form.Control
                                                     type="password"
                                                     name="confirmPassword"
@@ -260,7 +261,7 @@ function RegisterPage() {
                                         <Col xs={3} className="d-flex align-items-center">
                                             <Form.Label className="ms-2">userOtp</Form.Label>
                                         </Col>
-                                        <Col xs={9}>
+                                        <Col xs={12}>
                                             <Form.Control
                                                 type="text"
                                                 name="userOtp"

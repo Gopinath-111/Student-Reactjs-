@@ -7,7 +7,7 @@ import "../assets/css/LoginPage.css";
 import Loginimage from "../assets/login.jpg";
 import {loginApi} from "./Api.jsx";
 import NotificationModal from "./NotificationModal.jsx";
-import { FaSignInAlt } from "react-icons/fa";
+import { FaSignInAlt, FaEnvelope } from "react-icons/fa";
 
 //localStorage.clear();
 function LoginPage ()  {
@@ -62,9 +62,9 @@ function LoginPage ()  {
             <Row>
                 {/* Right Section - Login Form */}
                 <Col xs={12}>
-                <Row className="justify-content-center mb-4 mt-4">
-                    <FaSignInAlt size={30} className="mx-2" />
-                    <h3> Login Form </h3>
+                <Row className="justify-content-center mb-4" style={{ background: "#2575fc", borderTopLeftRadius: "20px", borderTopRightRadius: "20px", color: "white" }}   >
+                    <FaSignInAlt size={30} className="mx-2 mt-3 mb-2" />
+                    <h3 style={{color: "white"}}> Login Form </h3>
                 </Row>
                     <Row className="justify-content-center">
                         <Col xs={12}>
@@ -72,10 +72,10 @@ function LoginPage ()  {
                                 {/* Email Field */}
                                 <Form.Group className="p-4">
                                     <Row>
-                                        <Col xs={4} className="align-items-center">
+                                        {/*<Col xs={4} className="align-items-center">
                                             <Form.Label className="ms-2">Email</Form.Label>
-                                        </Col>
-                                        <Col xs={ 8}>
+                                        </Col>*/}
+                                        <Col xs={ 12}>
                                                 <Form.Control
                                                     type="email"
                                                     name="email"
@@ -91,10 +91,10 @@ function LoginPage ()  {
                                 {/* Password Field */}
                                 <Form.Group className="mb-3 p-4">
                                     <Row>
-                                        <Col xs={4} className="align-items-center">
+                                        {/*<Col xs={4} className="align-items-center">
                                             <Form.Label className="ms-2">Password</Form.Label>
-                                        </Col>
-                                        <Col xs={8}>
+                                        </Col>*/}
+                                        <Col xs={12}>
                                             <Form.Control
                                                 type="password"
                                                 name="password"

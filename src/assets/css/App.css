@@ -10,11 +10,10 @@ body {
     padding: 0;
     background: white;
     min-height: 100vh;
-    /*display: flex;*/
     align-items: center;
     justify-content: center;
-    background: linear-gradient(#3896e2,#f35a8dfb);
-    
+    background-image: linear-gradient(to right, #333399, #ff00cc);
+
 }
 
 .container-fluid {
