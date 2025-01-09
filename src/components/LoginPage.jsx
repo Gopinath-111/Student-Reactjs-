@@ -62,7 +62,6 @@ function LoginPage ()  {
             <Row>
                 {/* Right Section - Login Form */}
                 <Col xs={12}>
-                <img src="./assets/login.jpg"/>
                 <Row className="justify-content-center mb-4 mt-4">
                     <FaSignInAlt size={30} className="mx-2" />
                     <h3> Login Form </h3>
